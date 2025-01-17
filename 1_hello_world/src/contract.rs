@@ -85,7 +85,6 @@ mod tests {
 
         let _res = instantiate(deps.as_mut(), mock_env(), info, init_msg).unwrap();
 
-        // anyone can increment
         let info = mock_info(
             "anyone",
             &[Coin {
@@ -100,7 +99,6 @@ mod tests {
         };
         let _res = execute(deps.as_mut(), mock_env(), info, exec_msg).unwrap();
 
-        // should increase counter by 1
         let res = query(
             deps.as_ref(),
             mock_env(),
@@ -113,6 +111,8 @@ mod tests {
 
         // Print the result to the terminal
         println!("Queried Password: {}", value.password);
+
+        //cargo test -- --nocapture
 
         assert_eq!("password123", value.password);
     }
