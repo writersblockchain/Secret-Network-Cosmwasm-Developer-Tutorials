@@ -1,23 +1,61 @@
 "use client";
 
 import { useState } from "react";
+import { useWallet } from "../context/WalletContext";
+import ConnectWallet from "../components/ConnectWallet";
+import dotenv from "dotenv";
+dotenv.config();
 
 export default function Home() {
   const [flipResult, setFlipResult] = useState<"heads" | "tails" | null>(null);
+  const { walletAddress, secretjs } = useWallet();
 
-  const handleFlip = () => {
-    const result = Math.random() <= 0.5 ? "heads" : "tails";
-    setFlipResult(result);
 
-    const coin = document.getElementById("coin");
-    if (coin) {
-      coin.classList.remove("heads", "tails");
+  const contractAddress = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;
+  const contractCodeHash = process.env.NEXT_PUBLIC_CODE_HASH;
+  console.log(contractAddress, contractCodeHash);
+
+  const handleFlip = async () => {
+    
+    if (!secretjs || !walletAddress || !contractAddress) {
+      alert("Please connect your wallet and ensure contract address is set!");
+      return;
     }
-    setTimeout(() => {
-      if (coin) {
-        coin.classList.add(result);
-      }
-    }, 100);
+
+    try {
+      const flip_tx = await secretjs.tx.compute.executeContract(
+        {
+          sender: walletAddress,
+          contract_address: contractAddress,
+          msg: { flip: {} },
+          code_hash: contractCodeHash,
+        },
+        { gasLimit: 100_000 }
+      );
+
+      console.log("Flip transaction:", flip_tx);
+    } catch (error) {
+      console.error("Failed to execute flip:", error);
+    }
+  };
+
+  const queryFlip = async () => {
+    if (!secretjs || !contractAddress) {
+      alert("Please connect your wallet and ensure contract address is set!");
+      return;
+    }
+
+    try {
+      const flip_query = await secretjs.query.compute.queryContract({
+        contract_address: contractAddress,
+        code_hash: contractCodeHash,
+        query: { get_flip: {} },
+      });
+
+      console.log("Flip query result:", flip_query);
+    } catch (error) {
+      console.error("Failed to query flip:", error);
+    }
   };
 
   return (
@@ -38,6 +76,13 @@ export default function Home() {
           The result is: <strong>{flipResult}</strong>
         </p>
       )}
+      <ConnectWallet />
+      <button
+        onClick={queryFlip}
+        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg"
+      >
+        Query Flip Result
+      </button>
     </div>
   );
 }
