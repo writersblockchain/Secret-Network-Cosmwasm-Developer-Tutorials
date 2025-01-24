@@ -16,7 +16,7 @@ let contractCodeHash =
 
 let contractAddress = process.env.CONTRACT_ADDRESS;
 
-let query_contract = async () => {
+let try_query = async () => {
     let my_query = await secretjs.query.compute.queryContract({
       contract_address: contractAddress,
       code_hash: contractCodeHash,
@@ -26,4 +26,4 @@ let query_contract = async () => {
     });
     console.log("password: ", my_query);
   };
-  query_contract();
+  try_query();
