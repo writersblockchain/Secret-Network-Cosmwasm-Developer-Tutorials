@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Ensure the coin flips properly */
+#coin {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.side-a,
+.side-b {
+  backface-visibility: hidden; /* Ensure only one side is visible at a time */
+}
+
+.side-a {
+  z-index: 2; /* Keep heads on top by default */
+}
+
+.side-b {
+  transform: rotateY(180deg); /* Rotate tails */
+}
+
+/* Heads animation */
+#coin.heads {
+  animation: flipHeads 1s ease-out forwards;
+}
+
+/* Tails animation */
+#coin.tails {
+  animation: flipTails 1s ease-out forwards;
+}
+
+/* Define keyframes for flipping */
+@keyframes flipHeads {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(1800deg); /* 5 full rotations */
+  }
+}
+
+@keyframes flipTails {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(1980deg); /* 5 full rotations + tails landing */
+  }
+}

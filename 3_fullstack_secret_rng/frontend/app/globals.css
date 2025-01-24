@@ -10,42 +10,57 @@
 
 .side-a,
 .side-b {
-  backface-visibility: hidden; /* Ensure only one side is visible at a time */
+  backface-visibility: hidden;
 }
 
 .side-a {
-  z-index: 2; /* Keep heads on top by default */
+  z-index: 2;
 }
 
 .side-b {
-  transform: rotateY(180deg); /* Rotate tails */
+  transform: rotateY(180deg);
 }
 
-/* Heads animation */
-#coin.heads {
-  animation: flipHeads 1s ease-out forwards;
+/* Spinning animation */
+#coin.spinning {
+  animation: spinInfinite 1s linear infinite;
 }
 
-/* Tails animation */
-#coin.tails {
-  animation: flipTails 1s ease-out forwards;
+/* Blue (heads) animation */
+#coin.blue {
+  animation: flipBlue 1s ease-out forwards;
+}
+
+/* Red (tails) animation */
+#coin.red {
+  animation: flipRed 1s ease-out forwards;
+}
+
+/* Define keyframes for spinning */
+@keyframes spinInfinite {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
 }
 
 /* Define keyframes for flipping */
-@keyframes flipHeads {
+@keyframes flipBlue {
   from {
     transform: rotateY(0deg);
   }
   to {
-    transform: rotateY(1800deg); /* 5 full rotations */
+    transform: rotateY(1800deg);
   }
 }
 
-@keyframes flipTails {
+@keyframes flipRed {
   from {
     transform: rotateY(0deg);
   }
   to {
-    transform: rotateY(1980deg); /* 5 full rotations + tails landing */
+    transform: rotateY(1980deg);
   }
 }
