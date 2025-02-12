@@ -17,6 +17,9 @@ The repository currently includes the following tutorials:
 3. **Fullstack Secret RNG** (`3_fullstack_secret_rng`):  
    Dive deeper into creating a full-stack application that leverages Secret Network's privacy-preserving Random Number Generator (RNG).
 
+4. **Secret Tokens** (`4_secret_tokens`):  
+   Learn how to launch your own Secret tokens.
+
 ## Prerequisites
 
 Before starting, ensure you have the following installed:

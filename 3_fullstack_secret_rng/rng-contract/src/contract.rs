@@ -40,7 +40,7 @@ pub fn execute(
 
 pub fn try_flip(deps: DepsMut, env: Env) -> Result<Response, ContractError> {
     config(deps.storage).update(|mut state| -> Result<_, ContractError> {
-        let coin_flip = env.block.random.unwrap().0[0] % 2;
+        let coin_flip = env.block.random.unwrap().0;
         state.flip = coin_flip;
         Ok(state)
     })?;

@@ -3,7 +3,7 @@ import * as fs from "fs";
 import dotenv from "dotenv";
 dotenv.config();
 
-const wallet = new Wallet(process.env.MNEMONIC);
+const wallet = new Wallet(process.env.MNEMONIC1);
 const contract_wasm = fs.readFileSync("./contract.wasm.gz");
 
 const secretjs = new SecretNetworkClient({
@@ -47,13 +47,14 @@ let instantiate_contract = async () => {
     throw new Error("codeId or contractCodeHash is not set.");
   }
 
-  const initMsg = { flip: 42 };
+  const initMsg = { flip: [42] };
+  // const jsonBytes = new TextEncoder().encode(JSON.stringify(initMsg));
   let tx = await secretjs.tx.compute.instantiateContract(
     {
       code_id: codeId,
       sender: wallet.address,
       code_hash: contractCodeHash,
-      init_msg: initMsg,
+      init_msg: initMsg ,
       label: "rng tutorial" + Math.ceil(Math.random() * 10000),
     },
     {

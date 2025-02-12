@@ -2,7 +2,7 @@ import { SecretNetworkClient, Wallet } from "secretjs";
 import dotenv from "dotenv";
 dotenv.config();
 
-const wallet = new Wallet(process.env.MNEMONIC);
+const wallet = new Wallet(process.env.MNEMONIC1);
 
 let contractAddress = process.env.CONTRACT_ADDRESS;
 let contractCodeHash = process.env.CONTRACT_CODEHASH;

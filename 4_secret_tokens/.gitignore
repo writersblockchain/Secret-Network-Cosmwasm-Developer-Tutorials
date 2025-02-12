@@ -1,0 +1,10 @@
+# Ignore node_modules and target directories at any level
+**/node_modules/
+**/target/
+
+# Ignore specific files at any level
+**/contract.wasm
+**/contract.wasm.gz
+**/cargo.lock
+**/.DS_Store
+**/.env
