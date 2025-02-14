@@ -39,7 +39,7 @@ await window.keplr.enable(CHAIN_ID);
 const keplrOfflineSigner = window.keplr.getOfflineSigner(CHAIN_ID);
 const [{ address: myAddress }] = await keplrOfflineSigner.getAccounts();
 
-const url = "https://api.pulsar3.scrttestnet.com";
+const url = "https://pulsar.lcd.secretnodes.com";
 
 const secretjs = new SecretNetworkClient({
   url,

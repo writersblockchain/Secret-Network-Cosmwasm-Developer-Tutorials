@@ -36,7 +36,7 @@ export default function Home() {
     const keplrOfflineSigner = window.keplr.getOfflineSigner(CHAIN_ID);
     const [{ address: myAddress }] = await keplrOfflineSigner.getAccounts();
 
-    const url = "https://lcd.testnet.secretsaturn.net";
+    const url = "https://pulsar.lcd.secretnodes.com";
 
     const secretjs = new SecretNetworkClient({
       url,

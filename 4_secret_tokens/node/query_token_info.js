@@ -7,7 +7,7 @@ const wallet = new Wallet("desk pigeon hammer sleep only mistake stool december 
 
 const secretjs = new SecretNetworkClient({
     chainId: "pulsar-3",
-    url: "https://api.pulsar3.scrttestnet.com",
+    url: "https://pulsar.lcd.secretnodes.com",
     wallet: wallet,
     walletAddress: wallet.address,
   });
